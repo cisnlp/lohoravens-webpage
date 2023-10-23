@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Manipulation.">
+  <meta name="keywords" content="Long-Horizon Language-Conditioned Manipulation, Large Language Models, Vision-Langage Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoHoRavens</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4Y34PZ3XBE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4Y34PZ3XBE');
+  </script>
+
+  <script>
+    function updateSingleVideo() {
+      var demo = document.getElementById("single-menu-demos").value;
+      var task = document.getElementById("single-menu-tasks").value;
+      var inst = document.getElementById("single-menu-instances").value;
+
+      console.log("single", demo, task, inst)
+
+      var video = document.getElementById("single-task-result-video");
+      video.src = "https://cliport.github.io/media/results_web/" + 
+                  task + 
+                  "-two_stream_full_clip_lingunet_lat_transporter-n" + 
+                  demo + 
+                  "-train/videos/" + 
+                  task +
+                  "-0000" + 
+                  inst + 
+                  ".mp4";
+      video.playbackRate = 2.0;
+      video.play();
+    }
+
+    function updateMultiVideo() {
+      var demo = document.getElementById("multi-menu-demos").value;
+      var task = document.getElementById("multi-menu-tasks").value;
+      var inst = document.getElementById("multi-menu-instances").value;
+
+      console.log("multi", demo, task, inst)
+
+      var video = document.getElementById("multi-task-result-video");
+      video.src = "https://cliport.github.io/media/results_web/" + 
+                  task + 
+                  "-two_stream_full_clip_lingunet_lat_transporter-n" + 
+                  demo + 
+                  "-train/videos/multi-language-conditioned-" + 
+                  task +
+                  "-0000" + 
+                  inst + 
+                  ".mp4";
+      video.playbackRate = 2.0;
+      video.play();
+    }
+
+  </script>
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" target="_blank" href="https://mohitshridhar.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" target="_blank" href="https://askforalfred.com/">
+            ALFRED
+          </a>
+          <a class="navbar-item" target="_blank" href="http://alfworld.github.io/">
+            ALFWorld
+          </a>
+          <a class="navbar-item" target="_blank" href="https://arxiv.org/pdf/1806.03831.pdf">
+            INGRESS
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Manipulation</h1>
+          <!-- <h3 class="title is-4 conference-authors"><a target="_blank" href="https://www.robot-learning.org/">CoRL 2021</a></h3> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a target="_blank" href="https://shengqiang-zhang.github.io/">Shengqiang Zhang</a><sup>1,3</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://www.phil-wicke.com/">Philipp Wicke</a><sup>1,3</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.ch/citations?user=w5ePE1oAAAAJ&hl=en">Lütfi Kerem Şenel</a><sup>1,3</sup>,</span><br>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=ppZN58sAAAAJ&hl=en">Luis Figueredo</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=IBzbBbwAAAAJ&hl=en">Abdeldjallil Naceri</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.de/citations?user=H1v0ztEAAAAJ&hl=de">Sami Haddadin</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://bplank.github.io/">Barbara Plank</a><sup>1,3</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=qIL9dWUAAAAJ&hl=en">Hinrich Schütze</a><sup>1,3</sup>,</span>
+            
+            
+            <!-- <span class="author-block">
+              <a target="_blank" href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>1, 2</sup>
+            </span> -->
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>CIS, LMU Munich,</span>
+            <span class="author-block"><sup>&nbsp;2</sup>RSI, MIRMI, TUM</span><br>
+            <span class="author-block"><sup>3</sup>Munich Center for Machine Learning (MCML)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a target="_blank" href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+<!--               <span class="link-block">
+                <a target="_blank" href="https://drive.google.com/file/d/1xzG5e1XF958HPuD_FZTiKROd9AQyd1fS/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a target="_blank" href="https://youtu.be/sguEFlVdEUA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a target="_blank" href="https://github.com/Shengqiang-Zhang/LoHo-Ravens"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-fullhd">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop height="100%">
+        <source src="https://cliport.github.io/media/videos/10sim_web_teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+      </br>
+        <span class="dcliport">CLIPort</span> is an end-to-end imitation-learning agent that can learn a single language-conditioned policy for various tabletop tasks.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/1_folding.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/4_chess.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/3_packing.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/6_sweeping.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/9_cherry.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/7_reading.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+       <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/2_bowl.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/8_rope.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+            <source src="https://cliport.github.io/media/videos/5_stacking.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<h2 class="subtitle has-text-centered">
+</br>
+  We learn <b>one multi-task policy</b> for 9 real-world tasks including folding cloths, sweeping beans etc. with just <b>179</b> image-action training pairs.
+</h2> -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered" style="position:relative">
+      <div class="column is-four-fifths" style="float: left; width: 80%;">
+      <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The convergence of embodied agents and large language models (LLMs) has brought significant advancements to embodied instruction following.
+            Particularly, the strong reasoning capabilities of LLMs make it possible for robots to perform long-horizon tasks without expensive annotated demonstrations.
+            However, public benchmarks for testing the long-horizon reasoning capabilities of language-conditioned robots in various scenarios are still missing. 
+            To fill this gap, this work focuses on the tabletop
+            manipulation task and releases a simulation benchmark,
+            <i>LoHoRavens</i>, which covers various long-horizon
+            reasoning aspects spanning color, size, space, arithmetics
+            and reference.
+            Furthermore, there is a key modality bridging problem for
+            long-horizon manipulation tasks with LLMs: how to
+            incorporate the observation feedback during robot execution
+            for the LLM's closed-loop planning, which is however less studied by prior work. 
+            We investigate two methods of bridging the modality gap: caption generation and learnable interface for incorporating explicit and implicit observation feedback to the LLM, respectively.
+            These methods serve as the two baselines for our proposed benchmark. 
+            Experiments show that both methods struggle to solve some tasks, indicating long-horizon manipulation tasks are still challenging for current popular models.
+            We expect the proposed public benchmark and baselines can help the community develop better models for long-horizon tabletop manipulation tasks. 
+          </p>
+        </div>
+      </div>
+      <div class="column is-two-fifths" style="float: right; width: 40%;">
+        <div class="column is-two-fifths" style="position:absolute; bottom:0">
+          <!-- <div class="float-bottom"> -->
+          <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/firstpage.png" class="interpolation-image" 
+          alt="Interpolate start reference image." />
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+  </div>
+
+    <!-- Paper video. -->
+    </br>
+    </br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <!-- <iframe src="https://www.youtube.com/embed/UdzoagBgWTA?rel=0&amp;showinfo=0" -->
+          <iframe src="https://www.youtube.com/embed/sguEFlVdEUA?si=50Ng-vZSNoTWdJZE"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/sguEFlVdEUA?si=50Ng-vZSNoTWdJZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen">
+
+    <div class="rows">
+
+
+    <!-- Animation. -->
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <h2 class="title is-3"><span class="dcliport">LoHoRavens Benchmark</span></h2>
+          <section class="hero is-light is-small">
+            <div class="hero-body">
+              <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+                  <div class="item item-steve">
+                    <video poster="" id="steve" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0002.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-fullbody">
+                    <video poster="" id="fullbody" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0003.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-shiba">
+                    <video poster="" id="shiba" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0004.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-blueshirt">
+                    <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0005.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-shiba">
+                    <video poster="" id="shiba" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0006.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-shiba">
+                    <video poster="" id="shiba" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0007.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                <div class="item item-chair-tp">
+                    <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0008.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-blueshirt">
+                    <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0009.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-blueshirt">
+                    <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0010.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-blueshirt">
+                    <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0011.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="item item-blueshirt">
+                    <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                      <source src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/videos/ICRA2024-LoHoRavens-1080P-d1_V1-0012.mp4"
+                              type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- <h2 class="subtitle has-text-centered">
+          </br>
+          There are 11 long-horizon language-conditioned tasks in LoHoRavens. 
+            We learn <b>one multi-task policy</b> for 9 real-world tasks including folding cloths, sweeping beans etc. with just <b>179</b> image-action training pairs.
+          </h2> -->
+
+        <h2 class="title is-3"><span class="dcliport">Baselines</span></h2>
+        <div class="content has-text-justified">
+          <p>
+            It has been a mainstream method to use LLMs as the planner for a robot's execution.  
+            However, how to incorporate real-time visual observation feedback into the
+            LLM's input is still an under-explored problem.  
+            This modality gap is especially severe for long-horizon robotic tasks because
+            an execution error in each of the robot's steps can affect all the following steps.
+            To solve this modality bridging problem, we propose two baseline methods to translate the visual observation into feedback that the LLM can understand for its closed-loop planning. 
+            We use the Planner-Actor-Reporter paradigm to unify our two baselines.
+            The feedback generation models of the two baselines are working as the Reporter module.
+          </p>
+        </div>
+
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Explicit feedback: Caption generation</h3>
+        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/explicit_baseline.png" class="interpolation-image" 
+         alt="Interpolate start reference image." />
+        <div class="content has-text-justified">
+          <p>
+            Inner Monologue demonstrated that human-provided language feedback can significantly improve high-level instruction completion on robotic manipulation tasks. 
+            But human-written language feedback is too expensive to scale.  We therefore explore a caption generation based model as an automatic way to generate language feedback without training.
+          </p>
+
+          <p>
+          As shown in the above figure, we use Llama 2 and the trained pick-and-place CLIPort primitive as the Planner and Actor, respectively.
+          For the Reporter,
+          we use the VLM OpenFlamingo with few-shot prompting to generate the following two types of feedback:
+          <i>Observation state feedback</i>
+          which is the information about the objects on the table and their potential changes,
+          and 
+          <i>Action success state feedback</i>
+          which is the description whether the last instruction is executed successfully or not.
+          </p>
+
+          <p>
+          When a step's action has executed, there will be a top-down RGB image rendered by the simulator. 
+          The VLM as the Reporter module will generate the caption feedback based on the current image or the whole image history.
+          This caption feedback is sent to the LLM for its next-step planning.
+          The Planner-Actor-Reporter closed-loop process will be
+          iteratively executed until the high-level goal is achieved
+          or the maximum number of trial steps has been exceeded.
+          </p>
+          
+            
+        </div>
+        <!-- <br/>
+            <b>Paradigm 1:</b> Unlike existing object detectors, CLIP is not limited to a predefined set of object classes. And unlike other vision-language models, it's not restricted by a top-down pipeline that detects objects with bounding boxes or instance segmentations. This allows us to forgo the traditional paradigm of training explicit detectors for cloths, pliers, chessboard squares, cherry stems, and other arbitrary things. 
+        <br/> -->
+        <br/>
+        <br/>
+        <!--/ Interpolating. -->
+
+        <!-- Re-rendering. -->
+        <h3 class="title is-4">Implicit feedback: Learnable interface</h3>
+        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/implicit_baseline.png" class="interpolation-image" 
+         alt="Interpolate start reference image." />
+        <div class="content has-text-justified">
+          <p>
+            Explicitly converting an image to language captions
+            is straightforward and simple. However,
+            it typically causes information loss and exaggerates bias present in training data.
+            On the other hand, training an end-to-end multimodal LLM would be too expensive.
+            Thus another common solution used in many VLMs is to use a learnable interface such as a
+            projection-based interface or a group of
+            learnable query tokens to connect
+            vision and language modalities while freezing parameters of
+            the LLM and the visual encoder.
+          </p>
+          <p>
+            We use LLaVA for this second baseline.
+            LLaVA uses the simple projection-based scheme as the learnable interface between the vision model and the pretrained LLM.
+            As shown in the above figure, the pretrained CLIP visual encoder ViT-L/14 encodes the observation image to visual embeddings. 
+            A single-layer MLP as the learnable interface then translates the visual embeddings to the LLM's token embedding space. 
+            The LLM will generate the next-step plan conditioned on the language instruction prompts and the translated visual embeddings.
+            LLaVA uses LLaMA as the LLM.
+          </p>
+          <p>
+            To fine-tune LLaVA, for each step of the task instances in the train set, we use the oracle program of the simulator to generate the image before the step and the language instruction for the step as the pair of train data.
+            For the inference process, LLaVA receives the generated
+            images after each step's execution
+            (just as the caption generation based model does).
+            LLaVA then outputs the next-step language instruction to CLIPort for execution. 
+          </p>
+
+          </p>
+        </div>
+        <br/>
+        <br/>
+
+        <!--/ Re-rendering. -->
+
+        <h2 class="title is-3"><span class="dcliport">Results</span></h2>
+        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage//media/images/results.png" class="interpolation-image" 
+         alt="Interpolate start reference image."/>
+
+
+
+        <!-- <h3 class="title is-4">Affordance Predictions</h3>
+        <div class="content has-text-justified">
+          <p>
+            Examples of pick and place affordance predictions from multi-task <span class="dcliport">CLIPort</span> models:
+          </p>
+        </div>
+        <br/>
+        <img src="https://cliport.github.io/media/images/affordances.png" class="interpolation-image" 
+         alt="Interpolate start reference image."/>
+        <br/>
+        <br/>
+        <img src="https://cliport.github.io/media/images/affordance2.png" class="interpolation-image" 
+         alt="Interpolate start reference image."/> -->
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-widescreen content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{shridhar2021cliport,
+  title     = {CLIPort: What and Where Pathways for Robotic Manipulation},
+  author    = {Shridhar, Mohit and Manuelli, Lucas and Fox, Dieter},
+  booktitle = {Proceedings of the 5th Conference on Robot Learning (CoRL)},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a href="https://cliport.github.io/">CLIPort</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
