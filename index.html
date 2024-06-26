@@ -1,9 +1,49 @@
 <!DOCTYPE html>
 <html>
+  <style type="text/css">
+    @font-face {
+      font-family: "Palatino";
+      src: url(./static/font/Palatino.ttc) format('truetype');
+    }
+    body,td,th,tr,p,a,ul,li,span {
+      font-family: "Palatino", "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", serif; /*'Lato', Verdana, Helvetica, sans-serif;*/
+      font-size: 20px; /*14*/
+      line-height: 130%;
+      }
+    h1 {
+      font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino, serif; /*'Lato', Verdana, Helvetica, sans-serif;*/
+      font-size: 25px;
+    }
+    h2 {
+      font-family: "TeXGyrePagella", "Palatino Linotype", "Book Antiqua", Palatino, serif; /*'Lato', Verdana, Helvetica, sans-serif;*/
+      font-size: 22px;
+      color: #ed6861; /*#fc4a1a;*/  /*#e37222;*/
+    }
+    a {
+    color: #ca3fec; /*#1772d0;*/
+    text-decoration:none;
+    }
+    a:focus, a:hover {
+    color: #e37222; /*#f7b733;*/ /*f09228;*/
+    text-decoration:none;
+    }
+    @font-face {
+      font-family: "Palatino";
+      src: url(./static/font/Palatino.ttc) format('truetype');
+    }
+    ul,OL {
+      padding-left: 50px;
+    }
+  </style>
 <head>
+  <!-- <style>
+    body {
+      font-family: "Palatino", sans-serif;
+    }
+  </style> -->
   <meta charset="utf-8">
   <meta name="description"
-        content="LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Manipulation.">
+        content="LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Rearrangement.">
   <meta name="keywords" content="Long-Horizon Language-Conditioned Manipulation, Large Language Models, Vision-Langage Models">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LoHoRavens</title>
@@ -83,68 +123,42 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body>
-
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" target="_blank" href="https://mohitshridhar.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" target="_blank" href="https://askforalfred.com/">
-            ALFRED
-          </a>
-          <a class="navbar-item" target="_blank" href="http://alfworld.github.io/">
-            ALFWorld
-          </a>
-          <a class="navbar-item" target="_blank" href="https://arxiv.org/pdf/1806.03831.pdf">
-            INGRESS
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
+  <style>
+    * {
+      font-family: "TeXGyrePagella", "Palatino Linotype", "Google+Sans", "Noto+Sans", "Castoro", Palatino, serif;
+    }
+</style>
 
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title">LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Manipulation</h1>
+          <h1 class="title is-2 publication-title">LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Rearrangement</h1>
           <!-- <h3 class="title is-4 conference-authors"><a target="_blank" href="https://www.robot-learning.org/">CoRL 2021</a></h3> -->
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a target="_blank" href="https://shengqiang-zhang.github.io/">Shengqiang Zhang</a><sup>1,3</sup>,</span>
+              <a target="_blank" href="https://shengqiang-zhang.github.io/">Shengqiang Zhang</a><sup>1,4</sup>,</span>
             <span class="author-block">
-              <a target="_blank" href="https://www.phil-wicke.com/">Philipp Wicke</a><sup>1,3</sup>,</span>
+              <a target="_blank" href="https://www.phil-wicke.com/">Philipp Wicke</a><sup>1,4</sup>,</span><br>
             <span class="author-block">
-              <a target="_blank" href="https://scholar.google.ch/citations?user=w5ePE1oAAAAJ&hl=en">Lütfi Kerem Şenel</a><sup>1,3</sup>,</span><br>
+              <a target="_blank">Haihui Ye</a><sup>3</sup>,</span>
             <span class="author-block">
-              <a target="_blank" href="https://scholar.google.com/citations?user=ppZN58sAAAAJ&hl=en">Luis Figueredo</a><sup>2</sup>,</span>
+              <a target="_blank" href="https://scholar.google.ch/citations?user=w5ePE1oAAAAJ&hl=en">Lütfi Kerem Şenel</a><sup>1,4</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.de/citations?user=eIz0XvMAAAAJ&hl=en">Zhenshan Bing</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a target="_blank" href="https://scholar.google.com/citations?user=ppZN58sAAAAJ&hl=en">Luis Figueredo</a><sup>2</sup>,</span><br>
             <span class="author-block">
               <a target="_blank" href="https://scholar.google.com/citations?user=IBzbBbwAAAAJ&hl=en">Abdeldjallil Naceri</a><sup>2</sup>,</span>
             <span class="author-block">
+              <a target="_blank" href="https://scholar.google.de/citations?user=-CA8QgwAAAAJ&hl=en">Alois Knoll</a><sup>3</sup>,</span>
+            <span class="author-block">
               <a target="_blank" href="https://scholar.google.de/citations?user=H1v0ztEAAAAJ&hl=de">Sami Haddadin</a><sup>2</sup>,</span>
             <span class="author-block">
-              <a target="_blank" href="https://bplank.github.io/">Barbara Plank</a><sup>1,3</sup>,</span>
+              <a target="_blank" href="https://bplank.github.io/">Barbara Plank</a><sup>1,4</sup>,</span>
             <span class="author-block">
-              <a target="_blank" href="https://scholar.google.com/citations?user=qIL9dWUAAAAJ&hl=en">Hinrich Schütze</a><sup>1,3</sup>,</span>
+              <a target="_blank" href="https://scholar.google.com/citations?user=qIL9dWUAAAAJ&hl=en">Hinrich Schütze</a><sup>1,4</sup></span>
             
             
             <!-- <span class="author-block">
@@ -153,16 +167,17 @@
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>CIS, LMU Munich,</span>
+            <span class="author-block"><sup>1</sup>CIS, LMU Munich</span>
             <span class="author-block"><sup>&nbsp;2</sup>RSI, MIRMI, TUM</span><br>
-            <span class="author-block"><sup>3</sup>Munich Center for Machine Learning (MCML)</span>
+            <span class="author-block"><sup>3</sup>Informatics, TUM</span>
+            <span class="author-block"><sup>&nbsp;4</sup>Munich Center for Machine Learning (MCML)</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a target="_blank" href="https://arxiv.org/abs/2310.12020"
+                <a target="_blank" href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -291,62 +306,6 @@
   We learn <b>one multi-task policy</b> for 9 real-world tasks including folding cloths, sweeping beans etc. with just <b>179</b> image-action training pairs.
 </h2> -->
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered" style="position:relative">
-      <div class="column is-four-fifths" style="float: left; width: 80%;">
-      <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            The convergence of embodied agents and large language models (LLMs) has brought significant advancements to embodied instruction following.
-            Particularly, the strong reasoning capabilities of LLMs make it possible for robots to perform long-horizon tasks without expensive annotated demonstrations.
-            However, public benchmarks for testing the long-horizon reasoning capabilities of language-conditioned robots in various scenarios are still missing. 
-            To fill this gap, this work focuses on the tabletop
-            manipulation task and releases a simulation benchmark,
-            <i>LoHoRavens</i>, which covers various long-horizon
-            reasoning aspects spanning color, size, space, arithmetics
-            and reference.
-            Furthermore, there is a key modality bridging problem for
-            long-horizon manipulation tasks with LLMs: how to
-            incorporate the observation feedback during robot execution
-            for the LLM's closed-loop planning, which is however less studied by prior work. 
-            We investigate two methods of bridging the modality gap: caption generation and learnable interface for incorporating explicit and implicit observation feedback to the LLM, respectively.
-            These methods serve as the two baselines for our proposed benchmark. 
-            Experiments show that both methods struggle to solve some tasks, indicating long-horizon manipulation tasks are still challenging for current popular models.
-            We expect the proposed public benchmark and baselines can help the community develop better models for long-horizon tabletop manipulation tasks. 
-          </p>
-        </div>
-      </div>
-      <div class="column is-two-fifths" style="float: right; width: 40%;">
-        <div class="column is-two-fifths" style="position:absolute; bottom:0">
-          <!-- <div class="float-bottom"> -->
-          <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/firstpage.png" class="interpolation-image" 
-          alt="Interpolate start reference image." />
-          <!-- </div> -->
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-
-  </div>
-
-    <!-- Paper video. -->
-    </br>
-    </br>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <!-- <iframe src="https://www.youtube.com/embed/UdzoagBgWTA?rel=0&amp;showinfo=0" -->
-          <iframe src="https://www.youtube.com/embed/sguEFlVdEUA?si=50Ng-vZSNoTWdJZE"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-
-    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/sguEFlVdEUA?si=50Ng-vZSNoTWdJZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-</section>
 
 <section class="section">
   <div class="container is-max-widescreen">
@@ -357,7 +316,7 @@
     <!-- Animation. -->
     <div class="rows is-centered ">
       <div class="row is-full-width">
-        <h2 class="title is-3"><span class="dcliport">LoHoRavens Benchmark</span></h2>
+        <h2 class="title is-3">LoHoRavens Benchmark Examples</h2>
           <section class="hero is-light is-small">
             <div class="hero-body">
               <div class="container">
@@ -438,8 +397,8 @@
             We learn <b>one multi-task policy</b> for 9 real-world tasks including folding cloths, sweeping beans etc. with just <b>179</b> image-action training pairs.
           </h2> -->
 
-        <h2 class="title is-3"><span class="dcliport">Baselines</span></h2>
-        <div class="content has-text-justified">
+        <h2 class="title is-3">Baselines</h2>
+        <!-- <div class="content has-text-justified">
           <p>
             It has been a mainstream method to use LLMs as the planner for a robot's execution.  
             However, how to incorporate real-time visual observation feedback into the
@@ -450,38 +409,60 @@
             We use the Planner-Actor-Reporter paradigm to unify our two baselines.
             The feedback generation models of the two baselines are working as the Reporter module.
           </p>
-        </div>
+        </div> -->
 
 
         <!-- Interpolating. -->
-        <h3 class="title is-4">Explicit feedback: Caption generation</h3>
+        <h3 class="title is-4">Imitation Learning based model (IL)</h3>
+        <class="content has-text-justified">
+        <div>
+          <p>
+          We use the same architecture and training recipe as CLIPort for the imitation learning baseline.
+          Using multi-task training, the CLIPort model is trained with the train sets of all 20 seen tasks along with the three pick-and-place primitives for 100K steps. 
+          Because the vanilla CLIPort does not know when to stop execution, following Inner Monologue and CaP, we use an oracle termination variant that uses the oracle information from the simulator to detect the success rate and stop the execution process.
+          </p>
+        </div>
+
+        <br/>
+        <br/>
+
+        <h3 class="title is-4">Planner-Actor-Reporter based model (PAR)</h3>
         <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/explicit_baseline.png" class="interpolation-image" 
          alt="Interpolate start reference image." />
-        <div class="content has-text-justified">
+        <div>
+        <class="content has-text-justified">
           <p>
-            Inner Monologue demonstrated that human-provided language feedback can significantly improve high-level instruction completion on robotic manipulation tasks. 
-            But human-written language feedback is too expensive to scale.  We therefore explore a caption generation based model as an automatic way to generate language feedback without training.
+            The Planner-Actor-Reporter paradigm is frequently used in robotics.
+            Usually, LLMs serve as the Planner due to their impressive planning and reasoning capabilities, 
+            and humans or VLMs play the role of Reporter to provide necessary language feedback for the Planner's planning. 
+            The Actor is the agent that interacts with the environment.
           </p>
 
           <p>
-          As shown in the above figure, we use Llama 2 and the trained pick-and-place CLIPort primitive as the Planner and Actor, respectively.
-          For the Reporter,
-          we use the VLM OpenFlamingo with few-shot prompting to generate the following two types of feedback:
-          <i>Observation state feedback</i>
-          which is the information about the objects on the table and their potential changes,
-          and 
-          <i>Action success state feedback</i>
-          which is the description whether the last instruction is executed successfully or not.
+          As shown in the above figure, we use Llama 3 8B and the trained pick-and-place CLIPort primitive as the Planner and Actor, respectively.
+          For the Reporter, we use the VLM CogVLM2.
+          Theoretically, any type of feedback from the environment
+          and the robot can be considered to inform the LLM planner
+          as long as it can be stated verbally. However, considering the
+          LoHoRavens simulated environment and the VLMs we use,
+          we just prompt the VLMs to generate the following types of
+          feedback:
           </p>
 
-          <p>
-          When a step's action has executed, there will be a top-down RGB image rendered by the simulator. 
-          The VLM as the Reporter module will generate the caption feedback based on the current image or the whole image history.
-          This caption feedback is sent to the LLM for its next-step planning.
-          The Planner-Actor-Reporter closed-loop process will be
-          iteratively executed until the high-level goal is achieved
-          or the maximum number of trial steps has been exceeded.
-          </p>
+          <ul>
+          <li><i>Observation state feedback</i>:
+          Besides the human instruction at the beginning, the Planner needs to have the
+          information about the objects on the table for the planning.
+          Furthermore, if the states of the objects change, the VLM
+          Reporter should describe the changes to the LLM Planner.</li>
+          <li><i>Action success state feedback</i>:
+          The robot Actor
+          may fail to complete the instruction given by the LLM
+          Planner. This kind of success state information (or rather
+          failure information) should be conveyed to the Planner. The
+          VLM Reporter will indicate in its description whether the
+          last instruction is executed successfully or not. </li>
+          </ul>
           
             
         </div>
@@ -492,64 +473,59 @@
         <br/>
         <!--/ Interpolating. -->
 
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Implicit feedback: Learnable interface</h3>
-        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage/media/images/implicit_baseline.png" class="interpolation-image" 
-         alt="Interpolate start reference image." />
-        <div class="content has-text-justified">
-          <p>
-            Explicitly converting an image to language captions
-            is straightforward and simple. However,
-            it typically causes information loss and exaggerates bias present in training data.
-            On the other hand, training an end-to-end multimodal LLM would be too expensive.
-            Thus another common solution used in many VLMs is to use a learnable interface such as a
-            projection-based interface or a group of
-            learnable query tokens to connect
-            vision and language modalities while freezing parameters of
-            the LLM and the visual encoder.
-          </p>
-          <p>
-            We use LLaVA for this second baseline.
-            LLaVA uses the simple projection-based scheme as the learnable interface between the vision model and the pretrained LLM.
-            As shown in the above figure, the pretrained CLIP visual encoder ViT-L/14 encodes the observation image to visual embeddings. 
-            A single-layer MLP as the learnable interface then translates the visual embeddings to the LLM's token embedding space. 
-            The LLM will generate the next-step plan conditioned on the language instruction prompts and the translated visual embeddings.
-            LLaVA uses LLaMA as the LLM.
-          </p>
-          <p>
-            To fine-tune LLaVA, for each step of the task instances in the train set, we use the oracle program of the simulator to generate the image before the step and the language instruction for the step as the pair of train data.
-            For the inference process, LLaVA receives the generated
-            images after each step's execution
-            (just as the caption generation based model does).
-            LLaVA then outputs the next-step language instruction to CLIPort for execution. 
-          </p>
-
-          </p>
-        </div>
+        <h3 class="title is-4">More baselines are being added ...</h3>
         <br/>
         <br/>
 
-        <!--/ Re-rendering. -->
 
-        <h2 class="title is-3"><span class="dcliport">Results</span></h2>
-        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage//media/images/results.png" class="interpolation-image" 
+        <h2 class="title is-3">Results</h2>
+        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage//media/images/exp_results_dpi799.png" class="interpolation-image" 
          alt="Interpolate start reference image."/>
-
-
-
-        <!-- <h3 class="title is-4">Affordance Predictions</h3>
-        <div class="content has-text-justified">
-          <p>
-            Examples of pick and place affordance predictions from multi-task <span class="dcliport">CLIPort</span> models:
-          </p>
-        </div>
+         <p>
+        The above figure shows how the two baselines perform on all seen tasks and unseen tasks.
+        Numbers are averages over all relevant tasks.
+        We can see that the imitation learning based CLIPort model (IL) performs a little worse than the Planner-Actor-Reporter based model (PAR) on the seen tasks. 
+        However, when generalizing to the unseen tasks, the IL model drops quit a lot while the PAR counterpart can have almost the same performance as on the seen tasks.
+        The binary success rate of both models is quite low, indicating it's very hard for them to finish all the steps of the long-horizon tasks. 
+        </p>
         <br/>
-        <img src="https://cliport.github.io/media/images/affordances.png" class="interpolation-image" 
+        <br/>
+        <img src="https://shengqiang-zhang.github.io/lohoravens-webpage//media/images/capabilities_results_dpi799.png" class="interpolation-image" 
          alt="Interpolate start reference image."/>
-        <br/>
-        <br/>
-        <img src="https://cliport.github.io/media/images/affordance2.png" class="interpolation-image" 
-         alt="Interpolate start reference image."/> -->
+         <p>
+         As we can see from the above figure, the overall tendency is that the models' performance drops as the number of combinations of reasoning increases.
+         This observation fits with our intuition that 
+         the more reasoning capabilities the tasks require,
+         the harder the tasks become.
+         But there are still some exceptions violating this rule.
+         Unexpectedly, the IL baseline performs better on the tasks requiring "color+size" capabilities than on the tasks requiring 
+         "color+size+commonsense" capabilities.
+         We speculate the reason is that "color+size+commonsense" tasks typically use commonsense to filter the objects needed to manipulate, thus this kind of task usually requires fewer steps to complete.
+        </p>
+         
+        <p>
+         Another interesting finding is that the two baselines perform differently regarding different reasoning capabilities.
+         On the seen tasks requiring spatial reasoning capability, 
+         the IL model usually performs better.
+         It is probably because current LLMs and VLMs do not have
+         good spatial understanding.
+         In contrast, the PAR model usually outperforms the IL model on tasks requiring commonsense.
+         Another observation is that the PAR model cannot deal with tasks requiring reference since LLMs cannot indicate the objects accurately if there is more than one object with the same size and color.
+         This also prevents the PAR model from solving the tasks
+         requiring arithmetic reasoning since these tasks usually
+         comprise multiple objects of the same kind.
+         </p>
+        <p>
+         The experiments also show that some tasks are extremely hard for both models. 
+         For tasks that contain hidden objects, 
+         both models struggle to reason to remove the top object that blocks the bottom target objects.
+         Moreover, they 
+         are almost completely unable to solve shape construction tasks.
+         To summarize, LoHoRavens is a good resource to benchmark methods for robotic manipulation. 
+         It is also a challenging benchmark that can facilitate future work on developing more advanced models on long-horizon robotic tasks.
+        </p>
+
+
 
       </div>
     </div>

@@ -38,8 +38,6 @@ body {
   margin-left: -10px;
 }
 
-.publication-title {
-}
 
 .publication-banner {
   max-height: parent;
@@ -58,7 +56,7 @@ body {
 }
 
 .publication-title {
-    font-family: 'Google Sans', sans-serif;
+    font-family: 'Google Sans', serif;
 }
 
 .publication-authors {
@@ -77,11 +75,9 @@ body {
     font-weight: bolder;
 }
 
-.publication-authors {
-}
 
 .publication-authors a {
-   color: hsl(121, 100%, 36%) !important;
+   color: hsl(0, 0%, 9%) !important;
 }
 
 .conference-authors a {
@@ -177,6 +173,7 @@ body {
     margin: 0 auto;
     max-height: 100%;
     max-width: 100%;
+    text-align: center;
 }
 
  .dropdown-item{
