@@ -2,7 +2,7 @@
 
 This is the repository that contains source code for the [LoHoRavens website](https://cisnlp.github.io/lohoravens-webpage/).
 
-If you find LoHoRavens useful for your work please cite:
+<!-- If you find LoHoRavens useful for your work please cite:
 ```
 @misc{zhang2023lohoravens,
     title={LoHoRavens: A Long-Horizon Language-Conditioned Benchmark for Robotic Tabletop Manipulation},
@@ -12,7 +12,7 @@ If you find LoHoRavens useful for your work please cite:
     archivePrefix={arXiv},
     primaryClass={cs.RO}
 }
-```
+``` -->
 
 # Website License
 Templated borrowed from <a href="https://cliport.github.io">CLIPort</a>  
